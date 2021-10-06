@@ -1,0 +1,215 @@
+use shimongo
+switched to db shimongo
+> show collections
+
+db.student.insertMany([{_id:4, name:"sam", marks:70, phone:8764343556, address:"thrissur", year:2010},{_id:5, name:"amritha", marks:100, phone:988765564, address:"Thrissur", year:2020},{_id:35, name:"Nanna", marks:96, phone:789545666, address:"Thrissur", year:2020}])
+{ "acknowledged" : true, "insertedIds" : [ 4, 5, 35 ] }
+> db.student.find()
+{ "_id" : 1, "name" : "Aisha", "marks" : 98, "phone" : 98763323, "address" : "Pratap nagar", "year" : 2021 }
+{ "_id" : 20, "name" : "Noreen", "marks" : 98, "phone" : 923455556, "address" : "gandhi nagar", "year" : 2010 }
+{ "_id" : 4, "name" : "sam", "marks" : 70, "phone" : 8764343556, "address" : "thrissur", "year" : 2010 }
+{ "_id" : 5, "name" : "amritha", "marks" : 100, "phone" : 988765564, "address" : "Thrissur", "year" : 2020 }
+{ "_id" : 35, "name" : "Nanna", "marks" : 96, "phone" : 789545666, "address" : "Thrissur", "year" : 2020 }
+> db.student.find({$and:[{marks:{$gt90}},{address:"Thrissur"}]})
+2021-09-30T09:49:33.737+0530 E  QUERY    [js] uncaught exception: ReferenceError: $gt90 is not defined :
+@(shell):1:32
+> db.student.find({$and:[{marks:{$gt90},{address:"Thrissur"}]})
+...
+...
+> db.student.find({$and:[{address:"Thrissur"},{marks:{$gt:90}}]})
+{ "_id" : 5, "name" : "amritha", "marks" : 100, "phone" : 988765564, "address" : "Thrissur", "year" : 2020 }
+{ "_id" : 35, "name" : "Nanna", "marks" : 96, "phone" : 789545666, "address" : "Thrissur", "year" : 2020 }
+> db.student.insertOne({_id:17, name:"tom", marks:60, phone:864323456, address:"ernakulam", year:2005})
+{ "acknowledged" : true, "insertedId" : 17 }
+> db.student.find()
+{ "_id" : 1, "name" : "Aisha", "marks" : 98, "phone" : 98763323, "address" : "Pratap nagar", "year" : 2021 }
+{ "_id" : 20, "name" : "Noreen", "marks" : 98, "phone" : 923455556, "address" : "gandhi nagar", "year" : 2010 }
+{ "_id" : 4, "name" : "sam", "marks" : 70, "phone" : 8764343556, "address" : "thrissur", "year" : 2010 }
+{ "_id" : 5, "name" : "amritha", "marks" : 100, "phone" : 988765564, "address" : "Thrissur", "year" : 2020 }
+{ "_id" : 35, "name" : "Nanna", "marks" : 96, "phone" : 789545666, "address" : "Thrissur", "year" : 2020 }
+{ "_id" : 17, "name" : "tom", "marks" : 60, "phone" : 864323456, "address" : "ernakulam", "year" : 2005 }
+> db.student.updateOne({_id:17},{$set:{name:"Sujith"}})
+{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 1 }
+> db.student.find()
+{ "_id" : 1, "name" : "Aisha", "marks" : 98, "phone" : 98763323, "address" : "Pratap nagar", "year" : 2021 }
+{ "_id" : 20, "name" : "Noreen", "marks" : 98, "phone" : 923455556, "address" : "gandhi nagar", "year" : 2010 }
+{ "_id" : 4, "name" : "sam", "marks" : 70, "phone" : 8764343556, "address" : "thrissur", "year" : 2010 }
+{ "_id" : 5, "name" : "amritha", "marks" : 100, "phone" : 988765564, "address" : "Thrissur", "year" : 2020 }
+{ "_id" : 35, "name" : "Nanna", "marks" : 96, "phone" : 789545666, "address" : "Thrissur", "year" : 2020 }
+{ "_id" : 17, "name" : "Sujith", "marks" : 60, "phone" : 864323456, "address" : "ernakulam", "year" : 2005 }
+> db.student.updateOne({_id:17},{$set:{year:2021}})
+{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 1 }
+> db.student.updateOne({_id:35},{$set:{year:2021}})
+{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 1 }
+> db.student.updateOne({_id:5},{$set:{year:2021}})
+{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 1 }
+> db.student.updateOne({_id:4},{$set:{year:2021}})
+{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 1 }
+> db.student.updateOne({_id:20},{$set:{year:2021}})
+{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 1 }
+> db.student.updateOne({_id:1},{$set:{year:2021}})
+{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 0 }
+> db.student.find()
+{ "_id" : 1, "name" : "Aisha", "marks" : 98, "phone" : 98763323, "address" : "Pratap nagar", "year" : 2021 }
+{ "_id" : 20, "name" : "Noreen", "marks" : 98, "phone" : 923455556, "address" : "gandhi nagar", "year" : 2021 }
+{ "_id" : 4, "name" : "sam", "marks" : 70, "phone" : 8764343556, "address" : "thrissur", "year" : 2021 }
+{ "_id" : 5, "name" : "amritha", "marks" : 100, "phone" : 988765564, "address" : "Thrissur", "year" : 2021 }
+{ "_id" : 35, "name" : "Nanna", "marks" : 96, "phone" : 789545666, "address" : "Thrissur", "year" : 2021 }
+{ "_id" : 17, "name" : "Sujith", "marks" : 60, "phone" : 864323456, "address" : "ernakulam", "year" : 2021 }
+> db.student.updateOne({_id:5},{$set:{name:"Abhilash"}})
+{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 1 }
+> db.student.find()
+{ "_id" : 1, "name" : "Aisha", "marks" : 98, "phone" : 98763323, "address" : "Pratap nagar", "year" : 2021 }
+{ "_id" : 20, "name" : "Noreen", "marks" : 98, "phone" : 923455556, "address" : "gandhi nagar", "year" : 2021 }
+{ "_id" : 4, "name" : "sam", "marks" : 70, "phone" : 8764343556, "address" : "thrissur", "year" : 2021 }
+{ "_id" : 5, "name" : "Abhilash", "marks" : 100, "phone" : 988765564, "address" : "Thrissur", "year" : 2021 }
+{ "_id" : 35, "name" : "Nanna", "marks" : 96, "phone" : 789545666, "address" : "Thrissur", "year" : 2021 }
+{ "_id" : 17, "name" : "Sujith", "marks" : 60, "phone" : 864323456, "address" : "ernakulam", "year" : 2021 }
+> db.student.deleteOne({_id:5})
+{ "acknowledged" : true, "deletedCount" : 1 }
+> db.student.find()
+{ "_id" : 1, "name" : "Aisha", "marks" : 98, "phone" : 98763323, "address" : "Pratap nagar", "year" : 2021 }
+{ "_id" : 20, "name" : "Noreen", "marks" : 98, "phone" : 923455556, "address" : "gandhi nagar", "year" : 2021 }
+{ "_id" : 4, "name" : "sam", "marks" : 70, "phone" : 8764343556, "address" : "thrissur", "year" : 2021 }
+{ "_id" : 35, "name" : "Nanna", "marks" : 96, "phone" : 789545666, "address" : "Thrissur", "year" : 2021 }
+{ "_id" : 17, "name" : "Sujith", "marks" : 60, "phone" : 864323456, "address" : "ernakulam", "year" : 2021 }
+> db.student.updateOne({_id:1},{$set:{city:"Kochi"}})
+{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 1 }
+> db.student.find()
+{ "_id" : 1, "name" : "Aisha", "marks" : 98, "phone" : 98763323, "address" : "Pratap nagar", "year" : 2021, "city" : "Kochi" }
+{ "_id" : 20, "name" : "Noreen", "marks" : 98, "phone" : 923455556, "address" : "gandhi nagar", "year" : 2021 }
+{ "_id" : 4, "name" : "sam", "marks" : 70, "phone" : 8764343556, "address" : "thrissur", "year" : 2021 }
+{ "_id" : 35, "name" : "Nanna", "marks" : 96, "phone" : 789545666, "address" : "Thrissur", "year" : 2021 }
+{ "_id" : 17, "name" : "Sujith", "marks" : 60, "phone" : 864323456, "address" : "ernakulam", "year" : 2021 }
+> db.student.updateOne({_id:1},{$set:{dept:"MCA"}})
+{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 1 }
+> db.student.updateOne({_id:20},{$set:{dept:"MCA"}})
+{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 1 }
+> db.student.updateOne({_id:4},{$set:{dept:"MCA"}})
+{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 1 }
+> db.student.find()
+{ "_id" : 1, "name" : "Aisha", "marks" : 98, "phone" : 98763323, "address" : "Pratap nagar", "year" : 2021, "city" : "Kochi", "dept" : "MCA" }
+{ "_id" : 20, "name" : "Noreen", "marks" : 98, "phone" : 923455556, "address" : "gandhi nagar", "year" : 2021, "dept" : "MCA" }
+{ "_id" : 4, "name" : "sam", "marks" : 70, "phone" : 8764343556, "address" : "thrissur", "year" : 2021, "dept" : "MCA" }
+{ "_id" : 35, "name" : "Nanna", "marks" : 96, "phone" : 789545666, "address" : "Thrissur", "year" : 2021 }
+{ "_id" : 17, "name" : "Sujith", "marks" : 60, "phone" : 864323456, "address" : "ernakulam", "year" : 2021 }
+> db.student.find({dept:{$eq:"MCA"}})
+{ "_id" : 1, "name" : "Aisha", "marks" : 98, "phone" : 98763323, "address" : "Pratap nagar", "year" : 2021, "city" : "Kochi", "dept" : "MCA" }
+{ "_id" : 20, "name" : "Noreen", "marks" : 98, "phone" : 923455556, "address" : "gandhi nagar", "year" : 2021, "dept" : "MCA" }
+{ "_id" : 4, "name" : "sam", "marks" : 70, "phone" : 8764343556, "address" : "thrissur", "year" : 2021, "dept" : "MCA" }
+> db.student.find().sort({name:1})
+{ "_id" : 1, "name" : "Aisha", "marks" : 98, "phone" : 98763323, "address" : "Pratap nagar", "year" : 2021, "city" : "Kochi", "dept" : "MCA" }
+{ "_id" : 35, "name" : "Nanna", "marks" : 96, "phone" : 789545666, "address" : "Thrissur", "year" : 2021 }
+{ "_id" : 20, "name" : "Noreen", "marks" : 98, "phone" : 923455556, "address" : "gandhi nagar", "year" : 2021, "dept" : "MCA" }
+{ "_id" : 17, "name" : "Sujith", "marks" : 60, "phone" : 864323456, "address" : "ernakulam", "year" : 2021 }
+{ "_id" : 4, "name" : "sam", "marks" : 70, "phone" : 8764343556, "address" : "thrissur", "year" : 2021, "dept" : "MCA" }
+> db.student.find().sort({marks:1})
+{ "_id" : 17, "name" : "Sujith", "marks" : 60, "phone" : 864323456, "address" : "ernakulam", "year" : 2021 }
+{ "_id" : 4, "name" : "sam", "marks" : 70, "phone" : 8764343556, "address" : "thrissur", "year" : 2021, "dept" : "MCA" }
+{ "_id" : 35, "name" : "Nanna", "marks" : 96, "phone" : 789545666, "address" : "Thrissur", "year" : 2021 }
+{ "_id" : 1, "name" : "Aisha", "marks" : 98, "phone" : 98763323, "address" : "Pratap nagar", "year" : 2021, "city" : "Kochi", "dept" : "MCA" }
+{ "_id" : 20, "name" : "Noreen", "marks" : 98, "phone" : 923455556, "address" : "gandhi nagar", "year" : 2021, "dept" : "MCA" }
+> db.student.find().sort({name:1})
+{ "_id" : 1, "name" : "Aisha", "marks" : 98, "phone" : 98763323, "address" : "Pratap nagar", "year" : 2021, "city" : "Kochi", "dept" : "MCA" }
+{ "_id" : 35, "name" : "Nanna", "marks" : 96, "phone" : 789545666, "address" : "Thrissur", "year" : 2021 }
+{ "_id" : 20, "name" : "Noreen", "marks" : 98, "phone" : 923455556, "address" : "gandhi nagar", "year" : 2021, "dept" : "MCA" }
+{ "_id" : 17, "name" : "Sujith", "marks" : 60, "phone" : 864323456, "address" : "ernakulam", "year" : 2021 }
+{ "_id" : 4, "name" : "sam", "marks" : 70, "phone" : 8764343556, "address" : "thrissur", "year" : 2021, "dept" : "MCA" }
+> db.student.find().sort({name:1}).pretty()
+{
+"_id" : 1,
+"name" : "Aisha",
+"marks" : 98,
+"phone" : 98763323,
+"address" : "Pratap nagar",
+"year" : 2021,
+"city" : "Kochi",
+"dept" : "MCA"
+}
+{
+"_id" : 35,
+"name" : "Nanna",
+"marks" : 96,
+"phone" : 789545666,
+"address" : "Thrissur",
+"year" : 2021
+}
+{
+"_id" : 20,
+"name" : "Noreen",
+"marks" : 98,
+"phone" : 923455556,
+"address" : "gandhi nagar",
+"year" : 2021,
+"dept" : "MCA"
+}
+{
+"_id" : 17,
+"name" : "Sujith",
+"marks" : 60,
+"phone" : 864323456,
+"address" : "ernakulam",
+"year" : 2021
+}
+{
+"_id" : 4,
+"name" : "sam",
+"marks" : 70,
+"phone" : 8764343556,
+"address" : "thrissur",
+"year" : 2021,
+"dept" : "MCA"
+}
+> db.student.updateOne({_id:4},{$set:{name:"Sam"}})
+{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 1 }
+> db.student.find()
+{ "_id" : 1, "name" : "Aisha", "marks" : 98, "phone" : 98763323, "address" : "Pratap nagar", "year" : 2021, "city" : "Kochi", "dept" : "MCA" }
+{ "_id" : 20, "name" : "Noreen", "marks" : 98, "phone" : 923455556, "address" : "gandhi nagar", "year" : 2021, "dept" : "MCA" }
+{ "_id" : 4, "name" : "Sam", "marks" : 70, "phone" : 8764343556, "address" : "thrissur", "year" : 2021, "dept" : "MCA" }
+{ "_id" : 35, "name" : "Nanna", "marks" : 96, "phone" : 789545666, "address" : "Thrissur", "year" : 2021 }
+{ "_id" : 17, "name" : "Sujith", "marks" : 60, "phone" : 864323456, "address" : "ernakulam", "year" : 2021 }
+> db.student.find().sort({name:1}).pretty()
+{
+"_id" : 1,
+"name" : "Aisha",
+"marks" : 98,
+"phone" : 98763323,
+"address" : "Pratap nagar",
+"year" : 2021,
+"city" : "Kochi",
+"dept" : "MCA"
+}
+{
+"_id" : 35,
+"name" : "Nanna",
+"marks" : 96,
+"phone" : 789545666,
+"address" : "Thrissur",
+"year" : 2021
+}
+{
+"_id" : 20,
+"name" : "Noreen",
+"marks" : 98,
+"phone" : 923455556,
+"address" : "gandhi nagar",
+"year" : 2021,
+"dept" : "MCA"
+}
+{
+"_id" : 4,
+"name" : "Sam",
+"marks" : 70,
+"phone" : 8764343556,
+"address" : "thrissur",
+"year" : 2021,
+"dept" : "MCA"
+}
+{
+"_id" : 17,
+"name" : "Sujith",
+"marks" : 60,
+"phone" : 864323456,
+"address" : "ernakulam",
+"year" : 2021
+}
